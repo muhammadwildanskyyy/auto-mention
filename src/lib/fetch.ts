@@ -122,7 +122,7 @@ export const generateTokens = async (code: string) => {
   insta_form.append("client_id", process.env.INSTAGRAM_CLIENT_ID as string);
 
   insta_form.append(
-    "client_secret",
+    "client-secret",
     process.env.INSTAGRAM_CLIENT_SECRET as string
   );
 
@@ -140,57 +140,17 @@ export const generateTokens = async (code: string) => {
     body: insta_form,
   });
 
-  // const token = await shortTokenRes.json();
-
-  // if (token.permissions.length > 0) {
-  //   console.log("token-->", token, "got permissions");
-  // }
-
-  // const long_token = await axios.get(
-  //   `${process.env.INSTAGRAM_BASE_URL}/access_token?grant_type=ig_exchange_token&client_secret=${process.env.INSTAGRAM_CLIENT_SECRET}&access_token=${token.access_token}`
-  // );
-
   const token = await shortTokenRes.json();
-  console.log(
-    "RESPONS LENGKAP DARI TOKEN JANGKA PENDEK:",
-    JSON.stringify(token, null, 2)
-  );
-  // Pastikan token.access_token benar-benar ada sebelum digunakan
-  if (!token.access_token) {
-    console.error(
-      "Error: token.access_token tidak ditemukan dalam respons token jangka pendek!"
-    );
-    return; // atau throw error
+
+  if (token.permissions.length > 0) {
+    console.log("token-->", token, "got permissions");
   }
 
-  // const long_token = await axios.get(
-  //   `${process.env.INSTAGRAM_BASE_URL}/v23.0/oauth/access_token`, // URL dan path yang benar
-  //   {
-  //     params: {
-  //       // Menggunakan objek 'params' lebih aman untuk encoding URL
-  //       grant_type: "fb_exchange_token",
-  //       client_id: process.env.INSTAGRAM_CLIENT_ID, // Ini harus ID Aplikasi Facebook Anda
-  //       client_secret: process.env.INSTAGRAM_CLIENT_SECRET, // Ini harus Rahasia Aplikasi Facebook Anda
-  //       fb_exchange_token: token.access_token, // Token Facebook jangka pendek Anda
-  //     },
-  //   }
-  // );
+  const long_token = await axios.get(
+    `${process.env.INSTAGRAM_BASE_URL}/access_token?grant_type=ig_exchange_token&client_secret=${process.env.INSTAGRAM_CLIENT_SECRET}&access_token=${token.access_token}`
+  );
 
-  // graph.facebook.com/{graph-api-version}/oauth/access_token?grant_type=fb_exchange_token&client_id={app-id}&client_secret={app-secret}&fb_exchange_token={your-access-token}
-
-  // const long_token = await axios.get(
-  //   `${process.env.INSTAGRAM_BASE_URL}/access_token`,
-  //   {
-  //     params: {
-  //       grant_type: "ig_exchange_token",
-  //       client_secret: process.env.INSTAGRAM_CLIENT_SECRET as string,
-  //       access_token: token.access_token,
-  //     },
-  //   }
-  // );
-
-  // return long_token.data;
-  return token;
+  return long_token.data;
 };
 
 // export const generateTokens = async (code: string) => {
