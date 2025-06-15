@@ -12,11 +12,11 @@ const Page = (props: Props) => {
 
   return (
     <div className="flex flex-col gap-y-10">
-      <div className="flex gap-5 lg:flex-row flex-col">
+      {/* <div className="flex gap-5 lg:flex-row flex-col">
         {DASHBOARD_CARDS.map((card) => (
           <DoubleGradientCard key={card.id} {...card} />
         ))}
-      </div>
+      </div> */}
 
       <div className="border-[1px] relative Oborder-in-active/50 p-5 rounded-xl">
         {" "}
