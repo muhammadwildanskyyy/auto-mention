@@ -16,6 +16,7 @@ import CreateAutomation from "../create-automation";
 import Search from "./search";
 import { Notifications } from "./notification";
 import MainBreadCrumb from "../bread-crumbs/main-bread-crumb";
+import Image from "next/image";
 
 type Props = {
   slug: string;
@@ -32,7 +33,16 @@ const Navbar = ({ slug }: Props) => {
             <Sheet trigger={<Menu />} classname="lg:hidden" side="left">
               <div className="flex flex-col gap-y-5 w-full h-full p-3 bg-[#0e0e0e] bg-opacity-90 bg-clip-padding backdrop-filter backdrop--blur__safari backdrop-blur-3xl">
                 <div className="flex gap-x-2 items-center p-5 justify-center">
-                  <LogoSmall />
+                  {/* <LogoSmall /> */}
+                  <div className="w-[220px] h-[80px] overflow-hidden relative mt-10">
+                    <Image
+                      src="/logo/svg/logo-no-background.svg"
+                      alt="logo"
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
                 </div>
 
                 <div className="flex flex-col py-3">
